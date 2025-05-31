@@ -121,7 +121,7 @@ class OminiModel(L.LightningModule):
 
             # Prepare t and x_t
             t = torch.sigmoid(torch.randn((imgs.shape[0],), device=self.device))
-            x_1 = torch.randn_like(x_0).to(self.device)
+            x_1 = torch.randn_like(x_0).to(self.device) # noise
             t_ = t.unsqueeze(1).unsqueeze(1)
             x_t = ((1 - t_) * x_0 + t_ * x_1).to(self.dtype)
 
@@ -165,7 +165,7 @@ class OminiModel(L.LightningModule):
             # Inputs of the condition (new feature)
             condition_latents=condition_latents,
             condition_ids=condition_ids,
-            condition_type_ids=condition_type_ids,
+            condition_type_ids=condition_type_ids,# not used
             # Inputs to the original transformer
             hidden_states=x_t,
             timestep=t,
@@ -182,4 +182,6 @@ class OminiModel(L.LightningModule):
         # Compute loss
         loss = torch.nn.functional.mse_loss(pred, (x_1 - x_0), reduction="mean")
         self.last_t = t.mean().item()
+        
+        import ipdb; ipdb.set_trace()
         return loss

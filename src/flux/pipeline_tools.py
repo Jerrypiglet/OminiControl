@@ -3,7 +3,6 @@ from diffusers.utils import logging
 from diffusers.pipelines.flux.pipeline_flux import logger
 from torch import Tensor
 
-
 def encode_images(pipeline: FluxPipeline, images: Tensor):
     images = pipeline.image_processor.preprocess(images)
     images = images.to(pipeline.device).to(pipeline.dtype)

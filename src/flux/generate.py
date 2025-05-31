@@ -88,8 +88,10 @@ def generate(
             if not name.endswith(".attn"):
                 continue
             module.c_factor = torch.ones(1, 1) * condition_scale
+            
 
     self = pipeline
+    
     (
         prompt,
         prompt_2,
@@ -227,6 +229,7 @@ def generate(
                 guidance = guidance.expand(latents.shape[0])
             else:
                 guidance = None
+                
             noise_pred = tranformer_forward(
                 self.transformer,
                 model_config=model_config,

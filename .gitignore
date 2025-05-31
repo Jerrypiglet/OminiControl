@@ -1,0 +1,11 @@
+# Ignore all .pyc files
+*.pyc
+
+# Ignore all .arrow files
+*.arrow
+
+# Ignore all .png files in examples/
+examples/*.png
+
+# Ignore all .yaml files in runs/
+runs/**/*.yaml
